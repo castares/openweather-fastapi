@@ -15,6 +15,8 @@ class WeatherRequest(BaseModel):
     country: Optional[str]
     units: Units = Units.METRIC
 
+    # TODO Add Validators for data parsing per field
+
 
 class WeatherResponse(BaseModel):
     status: str
