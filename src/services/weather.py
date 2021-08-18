@@ -11,7 +11,7 @@ from utils.error_handling import ServiceResponse
 class WeatherService(BaseModel):
     _settings: Settings = Settings()
     _cache: Cache = RequestMemoryCache()
-    response_validator: ServiceResponse = ServiceResponse()
+    _response_validator: ServiceResponse = ServiceResponse()
 
     class Config:
         arbitrary_types_allowed = True
@@ -47,7 +47,7 @@ class WeatherService(BaseModel):
         }
         async with httpx.AsyncClient() as client:
             resp = await client.get(url=base_url, params=params)
-            self.response_validator.handle_response(resp)
+            self._response_validator.handle_response(resp)
             parsed_response: WeatherResponse = await self._parse_response(resp)
             response_dict = parsed_response.dict()
         self._cache.save_to_cache(request_dict, response_dict)

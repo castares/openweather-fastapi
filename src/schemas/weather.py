@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from typing import Optional
 from enum import Enum
+from datetime import datetime
 
 
 class Units(Enum):
@@ -25,3 +26,10 @@ class WeatherResponse(BaseModel):
     country: str
     state: Optional[str]
     city: str
+
+
+class WeatherReview(BaseModel):
+    location: WeatherRequest
+    username: Optional[str]
+    description: str
+    create_time: datetime

@@ -6,7 +6,7 @@ from routers import weather
 app = FastAPI()
 
 
-@app.get("/", response_class=RedirectResponse)
+@app.get("/", include_in_schema=False, response_class=RedirectResponse)
 async def root() -> RedirectResponse:
     return RedirectResponse("/docs")
 
